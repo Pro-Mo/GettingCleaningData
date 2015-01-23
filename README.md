@@ -8,8 +8,23 @@ The source of this specif project can be found here: [source](http://archive.ics
 - Input: directory with all files required in this test, by default will get the directory called 'CHI HAR Dataset' from your wd if present.
 
 ### 1. Merge training and testdata into one set
-I've added one extra column (ID 562) for partion 'train' or 'test' values to distinguish between them still later on.
+Combined all files; rbind the X_train/test files and adding subject and activity columns;
+This is done in a loop, as all files and steps for train and test are identical (with the only difference the actual names "train" and "test")
+After this merging, all names are added from the features file.
 ### 2. Extract measurements on the mean and standard deviation for each measurement.
+This script takes all columns which contain "mean()" or "std()". 
+This results in a data.table of 66 columns + 2 columns (the subject and activity columns) = 68 columns total
 ### 3. Use descriptive activity names to name the activities in the data set.
+Takes the file 'activity_labels' to rename the activity numbers with their actual descriptions;
 ### 4. Appropriately label the data set with descriptive variable names.
+First replace the 
+body acceleration
+mean
+BodyBody = body
+
 ### 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+
+### Testing
+For every step, in the script there is a comment which starts with "print(", this way you can test the steps in between.
+For testing the end result, run `read.table("output2.txt", sep= "," , fileEncoding = "UTF-8", header=T)[c(1:3),c(1:2,67:68)]`
+after running the 

@@ -19,4 +19,21 @@ where 70% of the volunteers was selected for generating the training data and 30
 
 | Variable Name | Orig Variable name | Description |
 |:------------------|:---------------|:-------------------------------|
-||tBodyAcc-mean()-X | Mean value of BodyAcc|
+||tBodyAcc-mean()-X | Mean value of BodyAcc|Mean of time signal of the Body Acceleration in the X direction|
+tBodyAcc-XYZ
+tGravityAcc-XYZ
+tBodyAccJerk-XYZ
+tBodyGyro-XYZ
+tBodyGyroJerk-XYZ
+tBodyAccMag
+tGravityAccMag
+tBodyAccJerkMag
+tBodyGyroMag
+tBodyGyroJerkMag
+fBodyAcc-XYZ
+fBodyAccJerk-XYZ
+fBodyGyro-XYZ
+fBodyAccMag
+fBodyAccJerkMag
+fBodyGyroMag
+fBodyGyroJerkMag
