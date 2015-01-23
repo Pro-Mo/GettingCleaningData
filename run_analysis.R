@@ -6,6 +6,7 @@
 run_analysis <- function(directory = 'UCI HAR Dataset') {
       require("data.table")
       require("plyr")
+      require("dplyr")
       
       ## open train and test set in given directory;
       train_path <- paste(directory,"train","X_train.txt", sep="/")
@@ -23,7 +24,7 @@ run_analysis <- function(directory = 'UCI HAR Dataset') {
       test_DT <- mutate(test_DT, partition = "test")
       test_DT <- mutate(test_DT, subject = readLines("UCI HAR Dataset/test/subject_test.txt")[1:100])
       test_DT <- mutate(test_DT, activity = readLines("UCI HAR Dataset/test/y_test.txt")[1:100])
-      #print(test_DT[1,561:564, with=F])
+      #print(test_DT[1,561:563, with=F])
       
       ## Step 1: merging the test and train together
       DT <- rbind(train_DT, test_DT)
@@ -32,9 +33,9 @@ run_analysis <- function(directory = 'UCI HAR Dataset') {
       setnames(DT,1:561,as.character(features_file[1:561,2]))
       #print(DT[1,561:562, with=F])
 
-      ## Step 2: select only the columns which mention 'mean()' or 'std'
+      ## Step 2: select only the columns which mention 'mean()' or 'std()'
       ## and of course the partition, subject and activity columns
-      DT_subset <- DT[,grep(pattern ="mean\\(|std\\(|partition|subject|activity", names(DT)),with=F]
+      DT_subset <- DT[,grep(pattern ="mean\\(|std\\(|subject|activity", names(DT)),with=F]
       #print(DT_subset[1,66:69, with=F])
       
       ## Step 3: Use descriptive activity names to name the activities in the data set
@@ -43,11 +44,14 @@ run_analysis <- function(directory = 'UCI HAR Dataset') {
       #print(DT_subset[1,66:69, with=F])
       
       ## Step 4: Appropriately label the data set with descriptive variable names
-      #colnames(DT_subset)
-      
+      #print(colnames(DT_subset[,1,with=F]))
+      attr(DT_subset, "names") <- gsub("[-() ]", "_", names(DT_subset)) 
+
       ## Step 5: Create set with the average of each variable for each activity and each subject.
-      print(unique(DT_subset[,68:69,with=F]))
-      by_subject_object <- group_by(DT_subset, subject, activity)
-      summarise(by_subject_object, variable_average = average(2+2))
+      #group by subject and activity
+      by_subject_activity <- group_by(DT_subset, subject, activity)
+      DT_new <- unique(mutate_each(by_subject_activity, funs(mean)))
+      print(DT_new[1:5,c(1:3,ncol(DT_new)-1,ncol(DT_new)),with=F])
+      write.table(DT_new, file = "output.txt", sep = ",", row.names=F)
 }
 
