@@ -38,7 +38,8 @@ run_analysis <- function(directory = 'UCI HAR Dataset') {
       #print(DT_subset[1,66:68, with=F])
       
       ## Step 4: Appropriately label the data set with descriptive variable names
-      attr(DT_subset, "names") <- gsub("[-() ]", "", names(DT_subset)) 
+      attr(DT_subset, "names") <- gsub("[-() ]", "_", names(DT_subset))
+      attr(DT_subset, "names") <- gsub("___", "_", names(DT_subset))
       #print(colnames(DT_subset[,1,with=F]))
 
       ## Step 5: Create set with the average of each variable for each activity and each subject.
