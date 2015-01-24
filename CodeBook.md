@@ -29,7 +29,7 @@ were selected as required by the course project.
 |:------------------|:---------------|:-------------------------------|
 |tBodyAcc_mean_X |tBodyAcc-mean()-X | Mean value of BodyAcc|Mean of time signal of the Body Acceleration in the X direction|
 |subject      |Subject [1-30]	|Participants in the project, numbered|
-|activity	|Activity [1-6]	|Activities (was number, is translated as follows:) 1 WALKING 2 WALKING_UPSTAIRS 3 WALKING_DOWNSTAIRS 4 SITTING 5 STANDING 6 LAYING|
+|activity	|Activity [1-6]	|Activities (was number, is translated as follows:) <\br> 1 WALKING <\br> 2 WALKING_UPSTAIRS  <\br>3 WALKING_DOWNSTAIRS <\br> 4 SITTING  <\br>5 STANDING <\br>6 LAYING|
 |Time_BodyAcceleration_mean_X	|tBodyAcc-mean()-X	|Mean of time signal domain with Body Accelerator, X-as position|
 |Time_BodyAcceleration_mean_Y	|tBodyAcc-mean()-Y	|Mean of time signal domain with Body Accelerator, Y-as position|
 |Time_BodyAcceleration_mean_Z	|tBodyAcc-mean()-Z	|Mean of time signal domain with Body Accelerator, Z-as position|
