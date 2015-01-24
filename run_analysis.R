@@ -8,6 +8,14 @@ run_analysis <- function(directory = 'UCI HAR Dataset') {
       require("plyr")
       require("dplyr")
       
+      ## step 0: get the data from internet (if not already given)
+      if(!file.exists(directory)){
+            dir.create(directory)
+            setwd(directory)
+            temp <- tempfile()
+            download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip', temp)
+            unzip(temp)
+      }
       ## Step 1: merging the test and train together
       # initiate empty data.table;
       DT <- data.table()
@@ -38,15 +46,27 @@ run_analysis <- function(directory = 'UCI HAR Dataset') {
       #print(DT_subset[1,66:68, with=F])
       
       ## Step 4: Appropriately label the data set with descriptive variable names
+      #print(colnames(DT_subset))
+      #replace interpunctions with one underscore
       attr(DT_subset, "names") <- gsub("[-() ]", "_", names(DT_subset))
       attr(DT_subset, "names") <- gsub("___", "_", names(DT_subset))
-      #print(colnames(DT_subset[,1,with=F]))
+      attr(DT_subset, "names") <- gsub("_*$", "", names(DT_subset))
+      #write out abbreviations
+      attr(DT_subset, "names") <- gsub("Acc", "Acceleration", names(DT_subset))
+      attr(DT_subset, "names") <- gsub("Gyro", "Gyroscope", names(DT_subset))
+      attr(DT_subset, "names") <- gsub("Mag", "Magnitude", names(DT_subset))
+      #write out the t and f at the beginning and add underscore for readibility
+      attr(DT_subset, "names") <- gsub("^t", "Time_", names(DT_subset))
+      attr(DT_subset, "names") <- gsub("^f", "Frequency_", names(DT_subset))
+      attr(DT_subset, "names") <- gsub("BodyBody", "Body", names(DT_subset))
+      #print(colnames(DT_subset))
 
       ## Step 5: Create set with the average of each variable for each activity and each subject.
       #group by subject and activity
       by_subject_activity <- group_by(DT_subset, subject, activity)
-      DT_new <- unique(mutate_each(by_subject_activity, funs(mean)))
+      DT_means <- unique(mutate_each(by_subject_activity, funs(mean)))
       #print(DT_new[1:5,c(1:3,ncol(DT_new)-1,ncol(DT_new)),with=F])
-      write.table(DT_new, file = "output2.txt", sep = " , ", row.names=F, fileEncoding = "UTF-8")
+      #put subject and activity columns first for readibility
+      DT_means <- DT_means[,c(67,68, 1:66),with=F]
+      write.table(DT_means, file = paste(directory,"Run_analysis_Output.txt",sep="/"), sep = ",", row.names=F, fileEncoding = "UTF-8")
 }
-
