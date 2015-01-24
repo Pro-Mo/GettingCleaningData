@@ -63,10 +63,13 @@ run_analysis <- function(directory = 'UCI HAR Dataset') {
 
       ## Step 5: Create set with the average of each variable for each activity and each subject.
       #group by subject and activity
-      by_subject_activity <- group_by(DT_subset, subject, activity)
-      DT_means <- unique(mutate_each(by_subject_activity, funs(mean)))
+      #by_subject_activity <- group_by(DT_subset, subject, activity)
+      #DT_means <- unique(mutate_each(by_subject_activity, funs(mean)))
+      
+      #DT_means <- DT_subset[, mean(DT_subset[,1:68]), by = c(subject, activity)]
+      DT_means <- ddply(DT_subset, .(subject, activity), function(x) colMeans(x[, 1:66]))
       #print(DT_new[1:5,c(1:3,ncol(DT_new)-1,ncol(DT_new)),with=F])
       #put subject and activity columns first for readibility
-      DT_means <- DT_means[,c(67,68, 1:66),with=F]
+      DT_means <- DT_means[,c(67,68, 1:66)]
       write.table(DT_means, file = paste(directory,"Run_analysis_Output.txt",sep="/"), sep = ",", row.names=F, fileEncoding = "UTF-8")
 }
