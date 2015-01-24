@@ -1,13 +1,15 @@
 ## Codebook on Samsung Accelerometers script run_analysis.R
-See for more details about specifics of the script: README.md
-This document describes the variables, the data, and any transformations or work that is performed to clean up the data
-### description of the Data/Introduction
-The source of this specif project can be found here: [source](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones/ "Information on Samsung Activity Recognition Using SmartPhones")
+See for more details about specifics of the script: README.md.
 
-The data set can be found here: [dataset](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip "Samsung Datasets Activity Recognition Using SmartPhones")
+This document describes the variables, the data, and any transformations or work that is performed to clean up the data
+
+### Description of the Data/Introduction
+See [source](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones/ "Information on Samsung Activity Recognition Using SmartPhones") of this specif project.
+
+See [data set](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip "Samsung Datasets Activity Recognition Using SmartPhones") for the specific .zip file which is used.
 (For more information about this dataset contact: activityrecognition@smartlab.ws)
 
-The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. 
+The experiments have been carried out with a group of 30 volunteers (subjects) within an age bracket of 19-48 years. 
 Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) 
 wearing a smartphone (Samsung Galaxy S II) on the waist. 
 Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. 
@@ -27,13 +29,7 @@ were selected as required by the course project.
 |:------------------|:---------------|:-------------------------------|
 |tBodyAcc_mean_X |tBodyAcc-mean()-X | Mean value of BodyAcc|Mean of time signal of the Body Acceleration in the X direction|
 |subject      |Subject [1-30]	|Participants in the project, numbered|
-|activity	|Activity [1-6]	|Activities (was number, is translated as follows:)
-1 WALKING
-2 WALKING_UPSTAIRS
-3 WALKING_DOWNSTAIRS
-4 SITTING
-5 STANDING
-6 LAYING|
+|activity	|Activity [1-6]	|Activities (was number, is translated as follows:) 1 WALKING 2 WALKING_UPSTAIRS 3 WALKING_DOWNSTAIRS 4 SITTING 5 STANDING 6 LAYING|
 |Time_BodyAcceleration_mean_X	|tBodyAcc-mean()-X	|Mean of time signal domain with Body Accelerator, X-as position|
 |Time_BodyAcceleration_mean_Y	|tBodyAcc-mean()-Y	|Mean of time signal domain with Body Accelerator, Y-as position|
 |Time_BodyAcceleration_mean_Z	|tBodyAcc-mean()-Z	|Mean of time signal domain with Body Accelerator, Z-as position|
